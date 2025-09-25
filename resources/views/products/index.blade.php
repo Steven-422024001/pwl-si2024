@@ -38,6 +38,7 @@
                                             <img src="{{ asset('/storage/images/'.$product->image) }}" class="rounded" style="width: 150px">
                                         </td>
                                         <td>{{ $product->title }}</td>
+                                        <td>{{ $product->supplier_name}}</td>
                                         <td>{{ $product->product_category_name }}</td>
                                         <td>{{ "Rp. ". number_format($product->price,2,',','.') }}</td>
                                         <td>{{ $product->stock }}</td>
