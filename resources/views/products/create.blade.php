@@ -39,7 +39,7 @@
                                 <label for="supplier_id">SUPPLIER</label>
                                 <select class="form-control" id="supplier_id" name="supplier">
                                     <option value="">-- Select Supplier Product --</option>
-                                    @foreach ($data['supplier'] as $supplier)
+                                    @foreach ($data['suppliers'] as $supplier)
                                         <option value="{{ $supplier->id }}">{{ $supplier->supplier_name }}</option>
                                     @endforeach
                                 </select>
@@ -47,7 +47,7 @@
 
                             <div class="form-group mb-3">
                                 <label class="font-weight-bold">TITLE</label>
-                                <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
+                                <input type="title" class="form-control @error('title') is-invalid @enderror" name="title"
                                         placeholder="Masukkan Judul Product">
                             </div>
 

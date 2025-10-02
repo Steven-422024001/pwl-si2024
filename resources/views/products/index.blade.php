@@ -43,13 +43,21 @@
                                         <td>{{ "Rp. ". number_format($product->price,2,',','.') }}</td>
                                         <td>{{ $product->stock }}</td>
                                         <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                                <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                            <form action="{{ route('products.destroy', $product->id) }}" 
+                                            method="POST" 
+                                            class="d-inline delete-form" 
+                                            id="delete-form-{{ $product->id }}">
+                                            <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                            <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-primary">EDIT</a>
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                            <button type="button" 
+                                            class="btn btn-sm btn-danger" 
+                                            onclick="confirmDelete({{ $product->id }}, '{{ $product->title }}')">
+                                        HAPUS
+                                        </button>
                                         </form>
+
                                     </td>
                                 </tr>
                                 @empty
@@ -88,6 +96,23 @@
             timer:2000
         });
     @endif
+
+ function confirmDelete(productId, productTitle) {
+    Swal.fire({
+        title: 'Apakah kamu yakin?',
+        text: "Produk '" + productTitle + "' akan dihapus permanen!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Ya, hapus!',
+        cancelButtonText: 'Batal'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('hapus-form-' + productId).submit();
+        }
+    })
+}
 
     </script>
 
